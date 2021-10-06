@@ -1,0 +1,9 @@
+1. Prompt the user for the height
+2. Take the input and check whether it's between 1 and 8 inclusively. 
+Use do while loop to repeat the process until the correct height is entered.
+3. Use while loop to loop through the entered height.
+4. Use variable i to store and increment the number of #s to be printed.
+5. To print right-aligned pyramid, we can print the 1st brick once by assigning 1 to i.
+To make it right-aligned, we should print spaces the same number of times as the entered height.
+6. Then we should decrement the entered height by one and increment i by 1 so that the 2nd brick will be printed 
+right under the 1st brick. And so on.
