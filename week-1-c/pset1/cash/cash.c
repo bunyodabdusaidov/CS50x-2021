@@ -2,6 +2,11 @@
 #include <cs50.h>
 #include <math.h>
 
+/* 
+This code is implemented using Greedy Algorithms.
+At each step of the algorithm, uses the largest value coin possible.
+*/
+
 int check_coins(int cents); // function prototype
 
 int main(void)
