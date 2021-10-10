@@ -2,6 +2,12 @@
 #include <cs50.h>
 #include <math.h>
 
+/* program that prompts the user for a credit card number 
+and then reports (via printf) whether it is a valid 
+American Express, MasterCard, or Visa card number 
+using Luhn's Algorithm that's used for determining if 
+credit card number is (syntactically) valid. */
+
 bool check_card_validity(long n); // function prototype
 string check_card_type(long n); // function prototype
 
