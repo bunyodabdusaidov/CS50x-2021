@@ -1,2 +1,2 @@
 *.vscode
-*.python-version
+.python-version
