@@ -6,7 +6,7 @@
 int count_letters(string text);
 int count_words(string text);
 int count_sentences(string text);
-float determine_grade(int letters, int words, int sentences);
+int determine_grade(int letters, int words, int sentences);
 
 int main(void)
 {
@@ -72,11 +72,10 @@ int count_sentences(string text)
     return n;
 }
 
-float determine_grade(int letters, int words, int sentences)
+int determine_grade(int letters, int words, int sentences)
 {
     float L = ((float)letters / (float)words) * 100;
     float S = ((float)sentences / (float)words) * 100;
-    float index = 0.0588 * round(L) - 0.296 * round(S) - 15.8;
-    printf("index: %f\n", round(index));
-    return round(index);
+    int index = round(0.0588 * L - 0.296 * S - 15.8);
+    return index;
 }
