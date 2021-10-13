@@ -5,7 +5,10 @@
 
 /* This program determines the grade level that is required to understand the given text.
 The code uses The Coleman-Liau index formula.
-The Coleman-Liau index of a text is designed to output what (U.S.) grade level is needed to understand the text. */
+The Coleman-Liau index of a text is designed to output what (U.S.) grade level is needed to understand the text. 
+
+link to description of the problem: https://cs50.harvard.edu/x/2021/psets/2/readability/
+*/
 
 // function prototypes
 int count_letters(string text);

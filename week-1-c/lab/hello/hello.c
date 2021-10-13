@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <cs50.h>
 
+/* link to description of the problem: https://cs50.harvard.edu/x/2021/labs/1/hello/ */
+
 int main(void)
 {
     // Prompt the user to enter his/her name

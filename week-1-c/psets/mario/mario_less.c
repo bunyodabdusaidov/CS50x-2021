@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <cs50.h>
 
+/* link to description of the problem: https://cs50.harvard.edu/x/2021/psets/1/mario/less/ */
+
 int main(void)
 {
     int n; // variable to store user's input

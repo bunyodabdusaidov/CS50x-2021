@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <cs50.h>
 
+/* link to description of the problem: https://cs50.harvard.edu/x/2021/psets/1/mario/more/ */
+
 void pyramid(int n); // function prototype
 
 int main(void)

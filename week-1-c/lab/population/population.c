@@ -2,6 +2,8 @@
 #include <cs50.h>
 #include <math.h>
 
+/* link to description of the problem: https://cs50.harvard.edu/x/2021/labs/1/population/ */
+
 int main(void)
 {
     // get the correct start size

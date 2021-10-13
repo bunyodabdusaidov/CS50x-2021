@@ -5,6 +5,8 @@
 /* 
 This code is implemented using Greedy Algorithms.
 At each step of the algorithm, uses the largest value coin possible.
+
+link to description of the problem: https://cs50.harvard.edu/x/2021/psets/1/cash/
 */
 
 int check_coins(int cents); // function prototype

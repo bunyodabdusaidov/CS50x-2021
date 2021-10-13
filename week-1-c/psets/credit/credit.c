@@ -6,7 +6,10 @@
 and then reports (via printf) whether it is a valid 
 American Express, MasterCard, or Visa card number 
 using Luhn's Algorithm that's used for determining if 
-credit card number is (syntactically) valid. */
+credit card number is (syntactically) valid. 
+
+link to description of the problem: https://cs50.harvard.edu/x/2021/psets/1/credit/
+*/
 
 bool check_card_validity(long n); // function prototype
 string check_card_type(long n); // function prototype
