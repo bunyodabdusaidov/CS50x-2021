@@ -1,0 +1,13 @@
+sort1 uses: Bubble Sort
+
+How do you know?: for random and reversed lists, it took longer to sort, but for sorted list it took much less time.
+
+sort2 uses: Merge Sort
+
+How do you know?: 1) This program performed sorting much faster than other two programs.
+2) This program's upper and lower bounds were almost the same which relates to merge sort
+
+sort3 uses: Selection Sort
+
+How do you know?: It took relatively more time to sort. This program's upper and lower bounds were almost the same
+which relates to selection sort.
