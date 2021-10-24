@@ -80,79 +80,71 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    int n;
+    int max = 0;
+    int n = 0;
     int j = 0;
     char *winners[MAX];
+    bool all_equal = true;
 
-    for (int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count - 1; i++)
     {
-        if (candidates[i].votes > candidates[i+1].votes)
+        if (candidates[i].votes != candidates[i+1].votes)
         {
-            n = i;
-            winners[j] = candidates[n].name;
-            printf("winners[j]: %s\n", winners[j]);
-        }
-        else if (candidates[i].votes < candidates[i+1].votes)
-        {
-            n = i + 1;
-            winners[j] = candidates[n].name;
-            printf("winners[j]: %s\n", winners[j]);
-        }
-        else if (candidates[i].votes == candidates[i+1].votes)
-        {
-            n = i;
-            winners[j] = candidates[n].name;
+            all_equal = false;
+            break;
         }
     }
+    //printf("all_equal: %i\n", all_equal);
 
-    for (int i = 0; i < candidate_count; i++)
+    if (all_equal)
     {
-        if (candidates[n].votes == candidates[i].votes & !strcmp(candidates[n].name, candidates[i].name) == 0)
+        for (int i = 0; i < candidate_count; i++)
         {
-            winners[++j] = candidates[i].name;
-            printf("winners[j]: %s\n", winners[j]);
+            winners[i] = candidates[i].name;
+            //printf("winners[i]: %s\n", winners[i]);
         }
     }
+    else
+    {
+        max = candidates[0].votes;
+        for (int i = 1; i < candidate_count; i++)
+        {
+            //printf("candidate: %s\n", candidates[i].name);   
+            if (max < candidates[candidate_count].votes)
+            {
+                max = candidates[i].votes;
+                n = i;
+                //printf("candidate: %s\n", candidates[i].name);
+            }
+        }
+
+        winners[j] = candidates[n].name;
+        for (int i = 0; i < candidate_count; i++)
+        {
+            if (candidates[n].votes == candidates[i].votes & strcmp(candidates[n].name, candidates[i].name) != 0)
+            {
+                winners[++j] = candidates[i].name;
+            }
+        }
+    }
+    
 
     int array_len = 0;
     while (winners[array_len])
     {
         array_len++;
     }
-
-    if (array_len == 1)
+    //printf("array_len: %i\n", array_len);
+    for (int i = 0; i < array_len - 1; i++)
     {
-        printf("%s\n", winners[array_len]);
-        return;
-    }
-    else if (array_len == 2)
-    {
-        if (strcmp(winners[0], winners[1]) < 0)
+        char *temp;
+        for (int j = i+1; j < array_len - 1; j++)
         {
-            printf("%s\n", winners[0]);
-            printf("%s\n", winners[1]);
-            return;
-        }
-        else
-        {
-            printf("%s\n", winners[1]);
-            printf("%s\n", winners[0]);
-            return;
-        }
-    }
-    else
-    {
-        for (int i = 0; i < array_len - 1; i++)
-        {
-            char *temp;
-            for (int j = i+1; j < array_len - 1; j++)
+            if (strcmp(winners[i], winners[j]) > 0)
             {
-                if (strcmp(winners[i], winners[j]) > 0)
-                {
-                    temp = winners[i];
-                    winners[i] = winners[j];
-                    winners[j] = temp;
-                }
+                temp = winners[i];
+                winners[i] = winners[j];
+                winners[j] = temp;
             }
         }
     }
