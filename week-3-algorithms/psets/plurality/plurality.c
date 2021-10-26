@@ -4,6 +4,11 @@
 #include <cs50.h>
 #include <ctype.h>
 
+/* 
+The program simulates a plurality vote election. 
+Link: https://cs50.harvard.edu/x/2021/psets/3/plurality/
+*/
+
 // Max number of candidates
 #define MAX 9
 
@@ -52,10 +57,10 @@ int main(int argc, string argv[])
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
     {
-        string candidate = get_string("Vote: ");
+        string name = get_string("Vote: ");
 
         // Check for invalid vote
-        if (!vote(candidate))
+        if (!vote(name))
         {
             printf("Invalid vote.\n");
         }
@@ -65,13 +70,13 @@ int main(int argc, string argv[])
 }
 
 // Update vote totals given a new vote
-bool vote(string candidate)
+bool vote(string name)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (strcmp(candidate, candidates[i].name) == 0)
+        if (strcmp(candidates[i].name, name) == 0)
         {
-            candidates[i].votes += 1;
+            candidates[i].votes++;
             return true;
         }
     }
@@ -81,13 +86,10 @@ bool vote(string candidate)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    int max;
-    int max_position = 0;
-    string winners[MAX];
-    int winner_index = 0;
+    int max_position = 0; // position of candidate with maximum number of votes
     
-    max = candidates[max_position].votes;
-    for (int i = 1; i < candidate_count; i++)
+    int max = candidates[max_position].votes; // determine the highest number of votes to compare
+    for (int i = 1; i <= candidate_count; i++)
     {
         if (max < candidates[i].votes)
         {
@@ -95,39 +97,15 @@ void print_winner(void)
             max = candidates[max_position].votes;
         }
     }
-    winners[winner_index] = candidates[max_position].name;
 
+    printf("%s\n", candidates[max_position].name);
     for (int i = 0; i < candidate_count; i++)
     {
+        // determine if there are other candidates with maximum number of votes
         if (candidates[max_position].votes == candidates[i].votes && strcmp(candidates[max_position].name, candidates[i].name) != 0)
         {
-            winners[++winner_index] = candidates[i].name;
+            printf("%s\n", candidates[i].name);
         }
-    }
-
-    int array_len = 0;
-    while (winners[array_len])
-    {
-        array_len++;
-    }
-    
-    string temp;
-    for (int i = 0; i < array_len - 1; i++)
-    {
-        for (int j = 1; j < array_len; j++)
-        {
-            if (strcmp(winners[i], winners[j]) > 0)
-            {
-                temp = winners[i];
-                winners[i] = winners[j];
-                winners[j] = temp;
-            }
-        }
-    }
-
-    for (int i = 0; i < array_len; i++)
-    {
-        printf("%s\n", winners[i]);
     }
 }
 
