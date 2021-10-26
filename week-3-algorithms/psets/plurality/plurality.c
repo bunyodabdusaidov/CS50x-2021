@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
 #include <cs50.h>
-#include <ctype.h>
 
 /* 
 The program simulates a plurality vote election. 
