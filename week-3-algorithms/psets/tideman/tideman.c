@@ -143,6 +143,31 @@ void add_pairs(void)
             }
         }
     }
+
+    for (int i = 0; i < pair_count; i++)
+    {
+        printf("{%i : {%i : %i}}\n", i, preferences[pairs[i].winner][pairs[i].loser], preferences[pairs[i].loser][pairs[i].winner]);
+    }
+
+    for (int i = 0; i < pair_count; i++)
+    {
+        if (preferences[pairs[i].winner][pairs[i].loser] - preferences[pairs[i].loser][pairs[i].winner] < 0)
+        {
+            pair_count--;
+            printf("n: %i\n", i);
+            for (int n = i; n < pair_count; n++)
+            {
+                printf("old: %s -> %s - %i: %i\n", candidates[pairs[n].winner], candidates[pairs[n].loser], preferences[pairs[n].winner][pairs[n].loser], preferences[pairs[n].loser][pairs[n].winner]);
+                pairs[n] = pairs[n+1];
+                printf("new: %s -> %s - %i: %i\n", candidates[pairs[n].winner], candidates[pairs[n].loser], preferences[pairs[n].winner][pairs[n].loser], preferences[pairs[n].loser][pairs[n].winner]);
+            }
+            i--;
+            for (int i = 0; i < pair_count; i++)
+            {
+                printf("{%i : {%i : %i}}\n", i, preferences[pairs[i].winner][pairs[i].loser], preferences[pairs[i].loser][pairs[i].winner]);
+            }
+        }
+    }
     return;
 }
 
@@ -152,25 +177,20 @@ void sort_pairs(void)
     pair temp;
     for (int i = 0; i < pair_count; i++)
     {
-        for (int j = 1; j < pair_count - 1; j++)
+        for (int j = 1; j < pair_count; j++)
         {
-            if ((preferences[pairs[i].winner][pairs[i].loser] - preferences[pairs[i].loser][pairs[i].winner] >= 0)
-            && (preferences[pairs[j].winner][pairs[j].loser] - preferences[pairs[j].loser][pairs[j].winner] >= 0))
+            if (preferences[pairs[i].winner][pairs[i].loser] < preferences[pairs[j].winner][pairs[j].loser])
             {
-                if (preferences[pairs[i].winner][pairs[i].loser] < preferences[pairs[j].winner][pairs[j].loser])
-                {
-                    //printf("sort: %i < %i\n", preferences[pairs[i].winner][pairs[i].loser], preferences[pairs[j].winner][pairs[j].loser]);
-                    temp = pairs[j];
-                    pairs[j] = pairs[i];    
-                    pairs[i] = temp;
-                }
+                printf("sort: %i < %i\n", preferences[pairs[i].winner][pairs[i].loser], preferences[pairs[j].winner][pairs[j].loser]);
+                temp = pairs[i];
+                pairs[i] = pairs[j];    
+                pairs[j] = temp;
             }
         }
     }
     for (int i = 0; i < pair_count; i++)
     {
-        printf("pair_count: %i\n", pair_count);
-        printf("%s -> %s: %i - %i\n", candidates[pairs[i].winner], candidates[pairs[i].loser], preferences[pairs[i].winner][pairs[i].loser], preferences[pairs[i].loser][pairs[i].winner]);
+        printf("{%i : {%i : %i}}\n", i, preferences[pairs[i].winner][pairs[i].loser], preferences[pairs[i].loser][pairs[i].winner]);
     }
     return;
 }
