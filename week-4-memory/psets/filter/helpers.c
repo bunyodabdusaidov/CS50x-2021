@@ -55,12 +55,11 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     for (int i = 0; i < height; i++)
     {
         int w = width;
-        printf("w: %i\n", half);
         for (int j = 0; j < half; j++)
         {
             RGBTRIPLE temp = image[i][j];
-            image[i][j] = image[i][w-1];
-            image[i][w-1] = temp;
+            image[i][j] = image[i][w - 1];
+            image[i][w - 1] = temp;
 
             w--;
         }
@@ -70,146 +69,130 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 
 // Blur image
 void blur(int h, int w, RGBTRIPLE image[h][w])
-{    
+{   
+    /* pixels should be calculated from the original pixel, so because
+    values are changed in place in original pixel it results in incorrect
+    calculation in other pixels. That's why another variable is needed to store 
+    the the changes without affecting the original pixel/image.*/
+
+    RGBTRIPLE image2[h][w];
     int red;
     int green;
     int blue;
-    int height = h - 1;
-    int width = w - 1;
+    int height = h - 1; // it prevents index error
+    int width = w - 1; // it prevents index error
     for (int i = 0; i < h; i++)
     {
         for (int j = 0; j < w; j++)
         {
+            // corners will have 4 pixels to be added and calculated the average
+
             // top left corner (first row)
             if (i == 0 && j == 0)
             {
-                red = round((image[i][j].rgbtRed + image[i][j + 1].rgbtRed + image[i + 1][j + 1].rgbtRed +image[i + 1][j].rgbtRed) / 4.0);
-                green = round((image[i][j].rgbtGreen + image[i][j+ 1].rgbtGreen + image[i + 1][j + 1].rgbtGreen + image[i + 1][j].rgbtGreen) / 4.0);
+                red = round((image[i][j].rgbtRed + image[i][j + 1].rgbtRed + image[i + 1][j + 1].rgbtRed + image[i + 1][j].rgbtRed) / 4.0);
+                green = round((image[i][j].rgbtGreen + image[i][j + 1].rgbtGreen + image[i + 1][j + 1].rgbtGreen + image[i + 1][j].rgbtGreen) /
+                              4.0);
                 blue = round((image[i][j].rgbtBlue + image[i][j + 1].rgbtBlue + image[i + 1][j + 1].rgbtBlue + image[i + 1][j].rgbtBlue) / 4.0);
-                //printf("top left corner: i = %i, j = %i\n", i, j);
             }
             // top right corner (first row)
             else if (i == 0 && j == width)
             {
                 red = round((image[i][j].rgbtRed + image[i][j - 1].rgbtRed + image[i + 1][j - 1].rgbtRed + image[i + 1][j].rgbtRed) / 4.0);
-                green = round((image[i][j].rgbtGreen + image[i][j - 1].rgbtGreen + image[i + 1][j - 1].rgbtGreen + image[i + 1][j].rgbtGreen) / 4.0);
+                green = round((image[i][j].rgbtGreen + image[i][j - 1].rgbtGreen + image[i + 1][j - 1].rgbtGreen + image[i + 1][j].rgbtGreen) /
+                              4.0);
                 blue = round((image[i][j].rgbtBlue + image[i][j - 1].rgbtBlue + image[i + 1][j - 1].rgbtBlue + image[i + 1][j].rgbtBlue) / 4.0);
-                //printf("top right corner: i = %i, j = %i\n", i, j);
             }
             // bottom left corner (last row)
             else if (i == height && j == 0)
             {
                 red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j + 1].rgbtRed + image[i][j + 1].rgbtRed) / 4.0);
-                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j + 1].rgbtGreen + image[i][j + 1].rgbtGreen) / 4.0);
+                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j + 1].rgbtGreen + image[i][j + 1].rgbtGreen) /
+                              4.0);
                 blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j + 1].rgbtBlue + image[i][j + 1].rgbtBlue) / 4.0);
-                //printf("bottom left corner: i = %i, j = %i\n", i, j);
             }
             // bottom right corner (last row)
             else if (i == height && j == width)
             {
                 red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j - 1].rgbtRed + image[i][j - 1].rgbtRed) / 4.0);
                 green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j - 1].rgbtGreen + image[i][j - 1].rgbtGreen) /
-                    4.0);
+                              4.0);
                 blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j - 1].rgbtBlue + image[i][j - 1].rgbtBlue) / 4.0);
-                //printf("bottom right corner: i = %i, j = %i\n", i, j);
             }
+            // corners will have 6 pixels to be added and calculated the average
 
             // top edges
             else if (i == 0 && j != 0 && j != width)
             {
-                printf("top edge\n");
-                red = round((image[i][j].rgbtRed + image[i][j - 1].rgbtRed + image[i + 1][j - 1].rgbtRed + image[i + 1][j].rgbtRed + image[i + 1][j + 1].rgbtRed +
-                 image[i][j + 1].rgbtRed) / 6.0);
-                printf("red: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtRed, image[i][j - 1].rgbtRed, image[i + 1][j - 1].rgbtRed, image[i + 1][j].rgbtRed, image[i + 1][j + 1].rgbtRed, image[i][j + 1].rgbtRed);
-;                
-                green = round((image[i][j].rgbtGreen + image[i][j - 1].rgbtGreen + image[i + 1][j - 1].rgbtGreen + image[i + 1][j].rgbtGreen + image[i + 1][j + 1].rgbtGreen 
-                + image[i][j + 1].rgbtGreen) / 6.0);
-                printf("green: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtGreen, image[i][j - 1].rgbtGreen, image[i + 1][j - 1].rgbtGreen, image[i + 1][j].rgbtGreen, image[i + 1][j + 1].rgbtGreen, image[i][j + 1].rgbtGreen);
+                red = round((image[i][j].rgbtRed + image[i][j - 1].rgbtRed + image[i + 1][j - 1].rgbtRed + image[i + 1][j].rgbtRed + image[i + 1][j
+                             + 1].rgbtRed + image[i][j + 1].rgbtRed) / 6.0);
 
-                blue = round((image[i][j].rgbtBlue + image[i][j - 1].rgbtBlue + image[i + 1][j - 1].rgbtBlue + image[i + 1][j].rgbtBlue + image[i + 1][j + 1].rgbtBlue +
-                 image[i][j + 1].rgbtBlue) / 6.0);
-                printf("blue: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtBlue, image[i][j - 1].rgbtBlue, image[i + 1][j - 1].rgbtBlue, image[i + 1][j].rgbtBlue, image[i + 1][j + 1].rgbtBlue, image[i][j + 1].rgbtBlue);
+                green = round((image[i][j].rgbtGreen + image[i][j - 1].rgbtGreen + image[i + 1][j - 1].rgbtGreen + image[i + 1][j].rgbtGreen +
+                               image[i + 1][j + 1].rgbtGreen + image[i][j + 1].rgbtGreen) / 6.0);
 
-                //printf("top edge: i = %i, j = %i\n", i, j);
+                blue = round((image[i][j].rgbtBlue + image[i][j - 1].rgbtBlue + image[i + 1][j - 1].rgbtBlue + image[i + 1][j].rgbtBlue + image[i +
+                              1][j + 1].rgbtBlue + image[i][j + 1].rgbtBlue) / 6.0);
             }
             // bottom edges
             else if (i == height && j != 0 && j != width)
             {
-                printf("bottom edge\n");
-                red = round((image[i][j].rgbtRed + image[height][j - 1].rgbtRed + image[height - 1][j - 1].rgbtRed + image[height - 1][j].rgbtRed + image[height - 1][j +
-                 1].rgbtRed + image[height][j + 1].rgbtRed) / 6.0);
-                printf("red: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtRed, image[height][j - 1].rgbtRed, image[height - 1][j - 1].rgbtRed, image[height - 1][j].rgbtRed, image[height - 1][j + 1].rgbtRed, image[height][j + 1].rgbtRed);
+                red = round((image[i][j].rgbtRed + image[height][j - 1].rgbtRed + image[height - 1][j - 1].rgbtRed + image[height - 1][j].rgbtRed +
+                             image[height - 1][j + 1].rgbtRed + image[height][j + 1].rgbtRed) / 6.0);
 
-                green = round((image[i][j].rgbtGreen + image[height][j - 1].rgbtGreen + image[height - 1][j - 1].rgbtGreen + image[height - 1][j].rgbtGreen + image[height -
-                 1][j + 1].rgbtGreen + image[height][j + 1].rgbtGreen) / 6.0);
-                printf("green: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtGreen, image[height][j - 1].rgbtGreen, image[height - 1][j - 1].rgbtGreen, image[height - 1][j].rgbtGreen, image[height - 1][j + 1].rgbtGreen, image[height][j + 1].rgbtGreen);
+                green = round((image[i][j].rgbtGreen + image[height][j - 1].rgbtGreen + image[height - 1][j - 1].rgbtGreen + image[height -
+                               1][j].rgbtGreen + image[height - 1][j + 1].rgbtGreen + image[height][j + 1].rgbtGreen) / 6.0);
 
-                blue = round((image[i][j].rgbtBlue + image[height][j - 1].rgbtBlue + image[height - 1][j - 1].rgbtBlue + image[height - 1][j].rgbtBlue + image[height -
-                 1][j + 1].rgbtBlue + image[height][j + 1].rgbtBlue) / 6.0);
-                printf("blue: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtBlue, image[height][j - 1].rgbtBlue, image[height - 1][j - 1].rgbtBlue, image[height - 1][j].rgbtBlue, image[height - 1][j + 1].rgbtBlue, image[height][j + 1].rgbtBlue);
-
-                //printf("bottom edge: i = %i, j = %i\n", i, j);
+                blue = round((image[i][j].rgbtBlue + image[height][j - 1].rgbtBlue + image[height - 1][j - 1].rgbtBlue + image[height -
+                              1][j].rgbtBlue + image[height - 1][j + 1].rgbtBlue + image[height][j + 1].rgbtBlue) / 6.0);
             }
             // left edges
             else if (j == 0 && i != 0 && i != height)
             {
-                printf("left edge\n");
-                red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j + 1].rgbtRed + image[i][j + 1].rgbtRed + image[i + 1][j + 1].rgbtRed + image[i
-                 + 1][j].rgbtRed) / 6.0);
-                printf("red: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtRed, image[i - 1][j].rgbtRed, image[i - 1][j + 1].rgbtRed, image[i][j + 1].rgbtRed, image[i + 1][j + 1].rgbtRed, image[i + 1][j].rgbtRed);
+                red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j + 1].rgbtRed + image[i][j + 1].rgbtRed + image[i + 1][j
+                             + 1].rgbtRed + image[i + 1][j].rgbtRed) / 6.0);
 
-                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j + 1].rgbtGreen + image[i][j + 1].rgbtGreen + image[i + 1][j + 1].rgbtGreen
-                 + image[i + 1][j].rgbtGreen) / 6.0);
-                printf("green: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtGreen, image[i - 1][j].rgbtGreen, image[i - 1][j + 1].rgbtGreen, image[i][j + 1].rgbtGreen, image[i + 1][j + 1].rgbtGreen, image[i + 1][j].rgbtGreen);
+                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j + 1].rgbtGreen + image[i][j + 1].rgbtGreen +
+                               image[i + 1][j + 1].rgbtGreen + image[i + 1][j].rgbtGreen) / 6.0);
 
-                blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j + 1].rgbtBlue + image[i][j + 1].rgbtBlue + image[i + 1][j + 1].rgbtBlue +
-                 image[i + 1][j].rgbtBlue) / 6.0);
-                printf("blue: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtBlue, image[i - 1][j].rgbtBlue, image[i - 1][j + 1].rgbtBlue, image[i][j + 1].rgbtBlue, image[i + 1][j + 1].rgbtBlue, image[i + 1][j].rgbtBlue);
-
-                //printf("left edge: i = %i, j = %i\n", i, j);
+                blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j + 1].rgbtBlue + image[i][j + 1].rgbtBlue + image[i +
+                              1][j + 1].rgbtBlue + image[i + 1][j].rgbtBlue) / 6.0);
             }
             // right edges
             else if (j == width && i != 0 && i != height)
             {
-                printf("right edge\n");
-                red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j - 1].rgbtRed + image[i][j - 1].rgbtRed + image[i + 1][j - 1].rgbtRed + image[i
-                 + 1][j].rgbtRed) / 6.0);
-                printf("red: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtRed, image[i - 1][j].rgbtRed, image[i - 1][j - 1].rgbtRed, image[i][j - 1].rgbtRed, image[i + 1][j - 1].rgbtRed, image[i + 1][j].rgbtRed);
+                red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j - 1].rgbtRed + image[i][j - 1].rgbtRed + image[i + 1][j
+                             - 1].rgbtRed + image[i + 1][j].rgbtRed) / 6.0);
 
-                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j - 1].rgbtGreen + image[i][j - 1].rgbtGreen + image[i + 1][j - 1].rgbtGreen
-                 + image[i + 1][j].rgbtGreen) / 6.0);
-                printf("green: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtGreen, image[i - 1][j].rgbtGreen, image[i - 1][j - 1].rgbtGreen, image[i][j - 1].rgbtGreen, image[i + 1][j - 1].rgbtGreen, image[i + 1][j].rgbtGreen);
+                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j - 1].rgbtGreen + image[i][j - 1].rgbtGreen +
+                               image[i + 1][j - 1].rgbtGreen + image[i + 1][j].rgbtGreen) / 6.0);
 
-                blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j - 1].rgbtBlue + image[i][j - 1].rgbtBlue + image[i + 1][j - 1].rgbtBlue
-                 + image[i + 1][j].rgbtBlue) / 6.0);
-                printf("blue: %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtBlue, image[i - 1][j].rgbtBlue, image[i - 1][j - 1].rgbtBlue, image[i][j - 1].rgbtBlue, image[i + 1][j - 1].rgbtBlue, image[i + 1][j].rgbtBlue);
-
-                //printf("right edge: i = %i, j = %i\n", i, j);
+                blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j - 1].rgbtBlue + image[i][j - 1].rgbtBlue + image[i +
+                              1][j - 1].rgbtBlue + image[i + 1][j].rgbtBlue) / 6.0);
             }
+            // middle pixel will have 9 pixels to be added and calculated the average
             // the remaining cases (middle pixels)
             else
             {
-                printf("middle\n");
-                red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j + 1].rgbtRed + image[i][j + 1].rgbtRed + image[i + 1][j + 1].rgbtRed + image[i
-                 + 1][j].rgbtRed + image[i + 1][j - 1].rgbtRed + image[i][j - 1].rgbtRed + image[i - 1][j - 1].rgbtRed) / 9.0);
-                printf("red: %i + %i + %i + %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtRed, image[i - 1][j].rgbtRed, image[i - 1][j + 1].rgbtRed, image[i][j + 1].rgbtRed, image[i + 1][j + 1].rgbtRed, image[i
-                 + 1][j].rgbtRed, image[i + 1][j - 1].rgbtRed, image[i][j - 1].rgbtRed, image[i - 1][j - 1].rgbtRed);
+                red = round((image[i][j].rgbtRed + image[i - 1][j].rgbtRed + image[i - 1][j + 1].rgbtRed + image[i][j + 1].rgbtRed + image[i + 1][j
+                             + 1].rgbtRed + image[i + 1][j].rgbtRed + image[i + 1][j - 1].rgbtRed + image[i][j - 1].rgbtRed + image[i - 1][j - 1].rgbtRed) /
+                            9.0);
 
-                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j + 1].rgbtGreen + image[i][j + 1].rgbtGreen + image[i + 1][j + 1].rgbtGreen
-                 + image[i + 1][j].rgbtGreen + image[i + 1][j - 1].rgbtGreen + image[i][j - 1].rgbtGreen + image[i - 1][j - 1].rgbtGreen) / 9.0);
-                printf("green: %i + %i + %i + %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtGreen, image[i - 1][j].rgbtGreen, image[i - 1][j + 1].rgbtGreen, image[i][j + 1].rgbtGreen, image[i + 1][j + 1].rgbtGreen, image[i + 1][j].rgbtGreen, image[i + 1][j - 1].rgbtGreen, image[i][j - 1].rgbtGreen, image[i - 1][j - 1].rgbtGreen);
+                green = round((image[i][j].rgbtGreen + image[i - 1][j].rgbtGreen + image[i - 1][j + 1].rgbtGreen + image[i][j + 1].rgbtGreen +
+                               image[i + 1][j + 1].rgbtGreen + image[i + 1][j].rgbtGreen + image[i + 1][j - 1].rgbtGreen + image[i][j - 1].rgbtGreen + image[i -
+                                       1][j - 1].rgbtGreen) / 9.0);
 
-                blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j + 1].rgbtBlue + image[i][j + 1].rgbtBlue + image[i + 1][j + 1].rgbtBlue +
-                 image[i + 1][j].rgbtBlue + image[i + 1][j - 1].rgbtBlue + image[i][j - 1].rgbtBlue + image[i - 1][j - 1].rgbtBlue) / 9.0);
-                printf("blue: %i + %i + %i + %i + %i + %i + %i + %i + %i\n", image[i][j].rgbtBlue, image[i - 1][j].rgbtBlue, image[i - 1][j + 1].rgbtBlue, image[i][j + 1].rgbtBlue, image[i + 1][j + 1].rgbtBlue, 
-                 image[i + 1][j].rgbtBlue, image[i + 1][j - 1].rgbtBlue, image[i][j - 1].rgbtBlue, image[i - 1][j - 1].rgbtBlue);
-                //printf("middle: i = %i, j = %i\n", i, j);
+                blue = round((image[i][j].rgbtBlue + image[i - 1][j].rgbtBlue + image[i - 1][j + 1].rgbtBlue + image[i][j + 1].rgbtBlue + image[i +
+                              1][j + 1].rgbtBlue + image[i + 1][j].rgbtBlue + image[i + 1][j - 1].rgbtBlue + image[i][j - 1].rgbtBlue + image[i - 1][j -
+                                      1].rgbtBlue) / 9.0);
             }
-            image[i][j].rgbtRed = red;
-            image[i][j].rgbtGreen = green;
-            image[i][j].rgbtBlue = blue;
-            printf("%i %i %i\n", image[i][j].rgbtRed, image[i][j].rgbtGreen, image[i][j].rgbtBlue);
+            
+            // when the pixel is blured, it will assign the result value to new variable without changing the original pixel
+            image2[i][j].rgbtRed = red;
+            image2[i][j].rgbtGreen = green;
+            image2[i][j].rgbtBlue = blue;
+            printf("%i %i %i\n", image2[i][j].rgbtRed, image2[i][j].rgbtGreen, image2[i][j].rgbtBlue);
         }
     }
+    image = image2; // assigning original image to image2 will result in changing values of original image which will have the blur effect
     return;
 }
