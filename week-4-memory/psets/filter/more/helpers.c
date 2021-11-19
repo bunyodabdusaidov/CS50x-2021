@@ -189,111 +189,186 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             if (i == 0 && j == 0)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i][j + 1].rgbtRed * 2) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 0);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i][j + 1].rgbtGreen * 2) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 0);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i][j + 1].rgbtBlue * 2) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i + 1][j].rgbtBlue * 0);
+                rx = (image[i][j].rgbtRed * 0) + (image[i][j + 1].rgbtRed * 2) + (image[i + 1][j + 1].rgbtRed * 1) +
+                     (image[i + 1][j].rgbtRed * 0);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i][j + 1].rgbtGreen * 2) + (image[i + 1][j + 1].rgbtGreen * 1) +
+                     (image[i + 1][j].rgbtGreen * 0);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i][j + 1].rgbtBlue * 2) + (image[i + 1][j + 1].rgbtBlue * 1) +
+                     (image[i + 1][j].rgbtBlue * 0);
             
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i][j + 1].rgbtRed * 0) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i][j + 1].rgbtGreen * 0) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2);
-                by = (image[i][j].rgbtBlue * 0) + (image[i][j + 1].rgbtBlue * 0) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i + 1][j].rgbtBlue * 2);
+                ry = (image[i][j].rgbtRed * 0) + (image[i][j + 1].rgbtRed * 0) + (image[i + 1][j + 1].rgbtRed * 1) +
+                     (image[i + 1][j].rgbtRed * 2);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i][j + 1].rgbtGreen * 0) + (image[i + 1][j + 1].rgbtGreen * 1) +
+                     (image[i + 1][j].rgbtGreen * 2);
+                by = (image[i][j].rgbtBlue * 0) + (image[i][j + 1].rgbtBlue * 0) + (image[i + 1][j + 1].rgbtBlue * 1) +
+                     (image[i + 1][j].rgbtBlue * 2);
             }
             // top right corner
             else if (i == 0 && j == w)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i + 1][j - 1].rgbtRed * -1) + (image[i + 1][j].rgbtRed * 0);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i + 1][j - 1].rgbtGreen * -1) + (image[i + 1][j].rgbtGreen * 0);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i + 1][j - 1].rgbtBlue * -1) + (image[i + 1][j].rgbtBlue * 0);
+                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i + 1][j - 1].rgbtRed * -1) +
+                     (image[i + 1][j].rgbtRed * 0);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i + 1][j - 1].rgbtGreen * -1) +
+                     (image[i + 1][j].rgbtGreen * 0);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i + 1][j - 1].rgbtBlue * -1) +
+                     (image[i + 1][j].rgbtBlue * 0);
 
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i + 1][j - 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i + 1][j - 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2);
-                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i + 1][j - 1].rgbtBlue * 1) + (image[i + 1][j].rgbtBlue * 2);
+                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i + 1][j - 1].rgbtRed * 1) +
+                     (image[i + 1][j].rgbtRed * 2);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i + 1][j - 1].rgbtGreen * 1) +
+                     (image[i + 1][j].rgbtGreen * 2);
+                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i + 1][j - 1].rgbtBlue * 1) +
+                     (image[i + 1][j].rgbtBlue * 2);
             }
             // bottom left corner
             else if (i == h && j == 0)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 2);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 2);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 2);
+                rx = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j + 1].rgbtRed * 1) +
+                     (image[i][j + 1].rgbtRed * 2);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j + 1].rgbtGreen * 1) +
+                     (image[i][j + 1].rgbtGreen * 2);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j + 1].rgbtBlue * 1) +
+                     (image[i][j + 1].rgbtBlue * 2);
 
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j + 1].rgbtRed * -1) + (image[i][j + 1].rgbtRed * 0);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j + 1].rgbtGreen * -1) + (image[i][j + 1].rgbtGreen * 0);
-                by = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j + 1].rgbtBlue * -1) + (image[i][j + 1].rgbtBlue * 0);
+                ry = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j + 1].rgbtRed * -1) +
+                     (image[i][j + 1].rgbtRed * 0);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j + 1].rgbtGreen * -1) +
+                     (image[i][j + 1].rgbtGreen * 0);
+                by = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j + 1].rgbtBlue * -1) +
+                     (image[i][j + 1].rgbtBlue * 0);
             }
             // bottom right corner
             else if (i == h && j == w)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i - 1][j - 1].rgbtRed * -1) + (image[i - 1][j].rgbtRed * 0);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i - 1][j - 1].rgbtGreen * -1) + (image[i - 1][j].rgbtGreen * 0);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i - 1][j - 1].rgbtBlue * -1) + (image[i - 1][j].rgbtBlue * 0);
+                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i - 1][j].rgbtRed * 0);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i - 1][j].rgbtGreen * 0);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i - 1][j - 1].rgbtBlue * -1) +
+                     (image[i - 1][j].rgbtBlue * 0);
 
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i - 1][j - 1].rgbtRed * -1) + (image[i - 1][j].rgbtRed * -2);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i - 1][j - 1].rgbtGreen * -1) + (image[i - 1][j].rgbtGreen * -2);
-                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i - 1][j - 1].rgbtBlue * -1) + (image[i - 1][j].rgbtBlue * -2);
+                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i - 1][j].rgbtRed * -2);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i - 1][j].rgbtGreen * -2);
+                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i - 1][j - 1].rgbtBlue * -1) +
+                     (image[i - 1][j].rgbtBlue * -2);
             }
             // top edge
             else if (i == 0 && j != 0 && j != w)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i + 1][j - 1].rgbtRed * -1) + (image[i + 1][j].rgbtRed * 0) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 2);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i + 1][j - 1].rgbtGreen * -1) + (image[i + 1][j].rgbtGreen * 0) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 2);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i + 1][j - 1].rgbtBlue * -1) + (image[i + 1][j].rgbtBlue * 0) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 2);
+                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i + 1][j - 1].rgbtRed * -1) +
+                     (image[i + 1][j].rgbtRed * 0) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 2);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i + 1][j - 1].rgbtGreen * -1) +
+                     (image[i + 1][j].rgbtGreen * 0) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 2);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i + 1][j - 1].rgbtBlue * -1) +
+                     (image[i + 1][j].rgbtBlue * 0) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 2);
 
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i + 1][j - 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 0);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i + 1][j - 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 0);
-                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i + 1][j - 1].rgbtBlue * 1) + (image[i + 1][j].rgbtBlue * 2) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 0);
+                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i + 1][j - 1].rgbtRed * 1) +
+                     (image[i + 1][j].rgbtRed * 2) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 0);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i + 1][j - 1].rgbtGreen * 1) +
+                     (image[i + 1][j].rgbtGreen * 2) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 0);
+                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i + 1][j - 1].rgbtBlue * 1) +
+                     (image[i + 1][j].rgbtBlue * 2) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 0);
             }
             // bottom edge
             else if (i == h && j != 0 && j != w)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i - 1][j - 1].rgbtRed * -1) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 2);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i - 1][j - 1].rgbtGreen * -1) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 2);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i - 1][j - 1].rgbtBlue * -1) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 2);
+                rx = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * -2) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 2);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * -2) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 2);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * -2) + (image[i - 1][j - 1].rgbtBlue * -1) +   
+                     (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 2);
 
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i - 1][j - 1].rgbtRed * -1) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j + 1].rgbtRed * -1) + (image[i][j + 1].rgbtRed * 0);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i - 1][j - 1].rgbtGreen * -1) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j + 1].rgbtGreen * -1) + (image[i][j + 1].rgbtGreen * 0);
-                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i - 1][j - 1].rgbtBlue * -1) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j + 1].rgbtBlue * -1) + (image[i][j + 1].rgbtBlue * 0);
+                ry = (image[i][j].rgbtRed * 0) + (image[i][j - 1].rgbtRed * 0) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j + 1].rgbtRed * -1) + (image[i][j + 1].rgbtRed * 0);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i][j - 1].rgbtGreen * 0) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j + 1].rgbtGreen * -1) + (image[i][j + 1].rgbtGreen * 0);
+                by = (image[i][j].rgbtBlue * 0) + (image[i][j - 1].rgbtBlue * 0) + (image[i - 1][j - 1].rgbtBlue * -1) +
+                     (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j + 1].rgbtBlue * -1) + (image[i][j + 1].rgbtBlue * 0);
             }
             // left edge
             else if (j == 0 && i != 0 && i != h)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 2) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 0);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 2) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 0);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 2) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i + 1][j].rgbtBlue * 0);
+                rx = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j + 1].rgbtRed * 1) +
+                     (image[i][j + 1].rgbtRed * 2) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 0);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j + 1].rgbtGreen * 1) +
+                     (image[i][j + 1].rgbtGreen * 2) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 0);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j + 1].rgbtBlue * 1) +
+                     (image[i][j + 1].rgbtBlue * 2) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i + 1][j].rgbtBlue * 0);
                 
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j + 1].rgbtRed * -1) + (image[i][j + 1].rgbtRed * 0) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j + 1].rgbtGreen * -1) + (image[i][j + 1].rgbtGreen * 0) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2);
-                by = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j + 1].rgbtBlue * -1) + (image[i][j + 1].rgbtBlue * 0) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i  + 1][j].rgbtBlue * 2);
+                ry = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j + 1].rgbtRed * -1) +
+                     (image[i][j + 1].rgbtRed * 0) + (image[i + 1][j + 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j + 1].rgbtGreen * -1) +
+                     (image[i][j + 1].rgbtGreen * 0) + (image[i + 1][j + 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2);
+                by = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j + 1].rgbtBlue * -1) +
+                     (image[i][j + 1].rgbtBlue * 0) + (image[i + 1][j + 1].rgbtBlue * 1) + (image[i  + 1][j].rgbtBlue * 2);
             }
             // right edge
             else if (j == w && i != 0 && i != h)
             {
                 // gx
-                rx = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j - 1].rgbtRed * -1) + (image[i][j - 1].rgbtRed * -2) + (image[i + 1][j - 1].rgbtRed * -1) + (image[i + 1][j].rgbtRed * 0);
-                gx = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j - 1].rgbtGreen * -1) + (image[i][j - 1].rgbtGreen * -2) + (image[i + 1][j - 1].rgbtGreen * -1) + (image[i + 1][j].rgbtGreen * 0);
-                bx = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j - 1].rgbtBlue * -1) + (image[i][j -   1].rgbtBlue * -2) + (image[i + 1][j - 1].rgbtBlue * -1) + (image[i  + 1][j].rgbtBlue * 0);
+                rx = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i][j - 1].rgbtRed * -2) + (image[i + 1][j - 1].rgbtRed * -1) + (image[i + 1][j].rgbtRed * 0);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i][j - 1].rgbtGreen * -2) + (image[i + 1][j - 1].rgbtGreen * -1) + (image[i + 1][j].rgbtGreen * 0);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j - 1].rgbtBlue * -1) +
+                     (image[i][j -   1].rgbtBlue * -2) + (image[i + 1][j - 1].rgbtBlue * -1) + (image[i  + 1][j].rgbtBlue * 0);
 
                 // gy
-                ry = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j - 1].rgbtRed * -1) + (image[i][j - 1].rgbtRed * 0) + (image[i + 1][j - 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2);
-                gy = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j - 1].rgbtGreen * -1) + (image[i][j - 1].rgbtGreen * 0) + (image[i + 1][j - 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2);
-                by = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j - 1].rgbtBlue * -1) + (image[i][j -   1].rgbtBlue * 0) + (image[i + 1][j - 1].rgbtBlue * 1) + (image[i  + 1][j].rgbtBlue * 2);
+                ry = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i][j - 1].rgbtRed * 0) + (image[i + 1][j - 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i][j - 1].rgbtGreen * 0) + (image[i + 1][j - 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2);
+                by = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j - 1].rgbtBlue * -1) +
+                     (image[i][j -   1].rgbtBlue * 0) + (image[i + 1][j - 1].rgbtBlue * 1) + (image[i  + 1][j].rgbtBlue * 2);
             }
-            edges[0] = round(sqrt(pow(rx, 2) + pow(ry, 2)));
-            edges[1] = round(sqrt(pow(gx, 2) + pow(gy, 2)));
-            edges[2] = round(sqrt(pow(bx, 2) + pow(by, 2)));
+            // middle pixels
+            else 
+            {
+                // gx
+                rx = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * 0) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i][j - 1].rgbtRed * -2) + (image[i + 1][j - 1].rgbtRed * -1) + (image[i + 1][j].rgbtRed * 0) +
+                     (image[i + 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 2) + (image[i - 1][j + 1].rgbtRed * 1);
+                gx = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * 0) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i][j - 1].rgbtGreen * -2) + (image[i + 1][j - 1].rgbtGreen * -1) + (image[i + 1][j].rgbtGreen * 0) +
+                     (image[i + 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 2) + (image[i - 1][j + 1].rgbtGreen * 1);
+                bx = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * 0) + (image[i - 1][j - 1].rgbtBlue * -1) +
+                     (image[i][j - 1].rgbtBlue * -2) + (image[i + 1][j - 1].rgbtBlue * -1) + (image[i + 1][j].rgbtBlue * 0) +
+                     (image[i + 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 2) + (image[i - 1][j + 1].rgbtBlue * 1);
+                
+                // gy
+                ry = (image[i][j].rgbtRed * 0) + (image[i - 1][j].rgbtRed * -2) + (image[i - 1][j - 1].rgbtRed * -1) +
+                     (image[i][j - 1].rgbtRed * 0) + (image[i + 1][j - 1].rgbtRed * 1) + (image[i + 1][j].rgbtRed * 2) +
+                     (image[i + 1][j + 1].rgbtRed * 1) + (image[i][j + 1].rgbtRed * 0) + (image[i - 1][j + 1].rgbtRed * -1);
+                gy = (image[i][j].rgbtGreen * 0) + (image[i - 1][j].rgbtGreen * -2) + (image[i - 1][j - 1].rgbtGreen * -1) +
+                     (image[i][j - 1].rgbtGreen * 0) + (image[i + 1][j - 1].rgbtGreen * 1) + (image[i + 1][j].rgbtGreen * 2) +
+                     (image[i + 1][j + 1].rgbtGreen * 1) + (image[i][j + 1].rgbtGreen * 0) + (image[i - 1][j + 1].rgbtGreen * -1);
+                by = (image[i][j].rgbtBlue * 0) + (image[i - 1][j].rgbtBlue * -2) + (image[i - 1][j - 1].rgbtBlue * -1) +
+                     (image[i][j - 1].rgbtBlue * 0) + (image[i + 1][j - 1].rgbtBlue * 1) + (image[i + 1][j].rgbtBlue * 2) +
+                     (image[i + 1][j + 1].rgbtBlue * 1) + (image[i][j + 1].rgbtBlue * 0) + (image[i - 1][j + 1].rgbtBlue * -1);
+            }
+
+            edges[0] = round(sqrt(pow(rx, 2) + pow(ry, 2))); // red channel
+            edges[1] = round(sqrt(pow(gx, 2) + pow(gy, 2))); // green channel 
+            edges[2] = round(sqrt(pow(bx, 2) + pow(by, 2))); // blue channel
             for (int n = 0; n < 3; n++)
             {
+                // if pixel value is more than 255, cap to 255
                 if (edges[n] > 255)
                 {
                     edges[n] = 255;
