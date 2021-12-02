@@ -5,6 +5,7 @@
 #include "dictionary.h"
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 
 // Represents a node in a hash table
@@ -27,19 +28,35 @@ int unsigned dict_size = 0;
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
+    int hash_value = hash(word);
+    node *cursor = malloc(sizeof(node));
+
+    cursor = table[hash_value];
     
+    while (cursor != NULL)
+    {
+        if (strcasecmp(cursor->word, word) == 0) 
+        {
+            free(cursor);
+            return true;
+        }
+        cursor = cursor->next;
+    }
     return false;
 }
 
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    int sum = 0;
-    for (int i = 0; word[i] != '\0'; i++)
+    int str_len = strlen(word);
+    int value = 0;
+    for (int i = 0; i < str_len; i++)
     {
-        sum += word[i];
+        value += word[i];
+        //printf("%c\n", word[i]);
     }
-    return sum % N;
+    value %= N;
+    return value;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
@@ -75,9 +92,9 @@ bool load(const char *dictionary)
             n->next = table[i];
             table[i] = n;
         }
+        free(n);
         dict_size++;
     }
-
     fclose(dict);
     return true;
 }
@@ -91,6 +108,19 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)
 {
-    // TODO
-    return false;
+    node *cursor = malloc(sizeof(node));
+    node *tmp = malloc(sizeof(node));
+    for (int i = 0; i < N; i++)
+    {
+        while(table[i] != NULL)
+        {
+            cursor = table[i]->next;
+            tmp = table[i];
+            free(tmp);
+            table[i] = cursor;
+        }
+    }
+    free(cursor);
+    free(tmp);
+    return true;
 }
