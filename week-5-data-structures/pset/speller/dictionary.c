@@ -20,23 +20,25 @@ node;
 // Number of buckets in hash table
 const unsigned int N = 26;
 
+// Number of words in dictionary
+unsigned int word_count = 0;
+
 // Hash table
 node *table[N];
-
-// Number of words in Dictionary
-int unsigned word_count = 0;
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    printf("checking\n");
-    int hash_value = hash(word);
-    node *cursor = table[hash_value];
+    int hash_value = hash(word); // get the hash value of the word
+    node *cursor = table[hash_value]; // point to the node in hash table
     
-    while (cursor != NULL)
+    while (cursor != NULL) // while cursor is not NULL
     {
-        if (strcasecmp(cursor->word, word) == 0) return true;
-        cursor = cursor->next;
+        if (strcasecmp(cursor->word, word) == 0) // if word matches the word in cursor node
+        {
+            return true; // return true
+        }
+        cursor = cursor->next; // move to the next node
     }
     return false;
 }
@@ -44,85 +46,72 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    printf("hashing\n");
     unsigned long hash = 5381;
     int c = 0;
     while (c == toupper(*word++))
     {
         hash = ((hash << 5) + hash) + c; // hash * 33 + c ;
     }
-        //printf("%c\n", word[i]);
     return hash % N;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
 bool load(const char *dictionary)
 {
-    printf("loading\n");
-    char str[LENGTH + 1]; 
+    char str[LENGTH + 1]; // word to assigned when loading dictionary
 
-    FILE *dict = fopen(dictionary, "r");
-    if (dict == NULL)
+    FILE *dict = fopen(dictionary, "r"); // open the dictionary (file) for reading
+    if (dict == NULL) // if cannot open, terminate the function
     {
         printf("Failed to open the dictionary!\n");
         return 1;
     }
-    while (fscanf(dict, "%s", str) != EOF)
+    while (fscanf(dict, "%s", str) != EOF) // scan/read the dictionary one string at a time assigning each string to str variable
     {
-        node *n = malloc(sizeof(node));
-        if (n == NULL)
+        node *n = malloc(sizeof(node)); // allocate memory for temporary node
+        if (n == NULL) // if cannot allocate, terminate the function
         {
             printf("Failed to allocate memory for new node!\n");
             return 2;
         }
 
-        strcpy(n->word, str);
-        n->next = NULL;
-        int i = hash(str);
+        strcpy(n->word, str); // copy str (word) from dictionary to word field in n node
+        int i = hash(str); // get the hash value of str (word) 
+        n->next = table[i]; // set new pointer
+        table[i] = n; // set head to new pointer
 
-        if (table[i] == NULL)
-        {
-            table[i] = n;
-        }
-        else
-        {
-            n->next = table[i];
-            table[i] = n;
-        }
-        free(n);
-        word_count++;
+        word_count++; // increment word count
     }
-    fclose(dict);
+    fclose(dict); // close the dictionary (file)
     return true;
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    if (word_count > 0) 
+    if (word_count > 0) // if any words exist
     {
-        return word_count;
+        return word_count; // return word count
     }
-    else 
+    else // if not
     {
-        return 0;
+        return 0; // return 0
     }
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)
 {
-    printf("unloading\n");
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; i++) // iterate through buckets
     {
-        node *cursor = table[i];
-        while (table[i] != NULL)
+        node *cursor = table[i]; // set cursor to current bucket 
+        while (cursor != NULL) // while cursor is not NULL
         {
-            node *tmp = cursor;
-            cursor = cursor->next;
-            free(tmp);
+            node *tmp = cursor; // store current node in tmp variable
+            cursor = cursor->next; // move cursor to the next node
+            free(tmp); // free tmp (current node)
         }
-        if (i == N - 1 && cursor == NULL)
+        if (i == N - 1 && cursor == NULL) // if the end of table and cursor is NULL
         {
             return true;
         }
