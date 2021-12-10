@@ -1,8 +1,4 @@
 import re
-import nltk
-from nltk.tokenize import sent_tokenize
-
-nltk.download('punkt', quiet=True)  # Download tokenizer for English
 
 
 def readability():
@@ -10,7 +6,7 @@ def readability():
 
     text = input("Text: ")  # Prompt the user for input
     words = text.split(' ')  # Get the list of words by splitting them with whitespace
-    sentences = sent_tokenize(text)  # Use sent_tokenize method from nltk package to separate text into sentences
+    sentences = re.split(r'(?<=[^A-Z].[.?]) +(?=[A-Z])', text)  # Use regex to separate text into sentences
     letters = str.join("", re.findall('\w', text))  # Use regex to get only letters
 
     L = float(len(letters)) / float(len(words)) * 100  # Average number of letters per 100 words in the text
