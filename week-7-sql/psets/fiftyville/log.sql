@@ -1,48 +1,30 @@
--- Get the id and description of crime scene from crime_scene_reports table by date and place
---SELECT description FROM crime_scene_reports WHERE day=28 AND month=7 AND year=2020 AND street="Chamberlin Street";
+-- Find the crime description in crime scene reports table using the time and place 
+SELECT description FROM crime_scene_reports WHERE day=28 AND month=7 AND year=2021 AND street="Humphrey Street";
 
--- According to the description of the selected crime scene, there are three witnesses and each of their transcripts mentions the courthouse.
--- Get the three witnesses' names and their transcripts from interviews table by the crime's date and mentions of the courthouse
-SELECT name, transcript FROM interviews WHERE day=28 AND month=7 AND year=2020 AND transcript LIKE "%courthouse%";
+-- Find the transcripts in interviews table which mention bakery 
+SELECT id, transcript FROM interviews WHERE day=28 AND month=7 AND year=2021 AND transcript LIKE "%bakery%";
 
---SELECT license_plate FROM courthouse_security_logs WHERE day=28 AND month=7 AND year=2020 AND activity="exit";
+-- Find the phone numbers of the callers and receivers in phone calls table using time 
+SELECT id, caller, receiver FROM phone_calls WHERE day=28 AND month=7 AND year=2021 AND duration < 60;
 
--- According  to Raymond and his transcript, we can search phone calls, flights, airports, and passengers to find the thief
--- Get the list of callers and receivers from phone_calls table by date and duration
---SELECT caller, receiver FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60;
+-- Find the license plates in bakery security logs
+SELECT license_plate FROM bakery_security_logs WHERE day=28 AND month=7 AND year=2021 AND hour=10 AND 14 < minute < 17 AND activity="exit";
 
--- From phone numbers of callers and receivers we can get the name and passport numbers of callers and receivers
--- Before getting the names and passport numbers, we need to find the potential list of airports and flights
---SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5;
+-- Find the origin airport id or abbreviation in airports table using to city name 
+SELECT id FROM airports WHERE city="Fiftyville";
 
--- We can get the list of name and passport numbers of callers and receivers
--- List of names and passport numbers of callers
---SELECT name, passport_number FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60);
--- List of names and passport numbers of receivers
---SELECT name, passport_number FROM people WHERE phone_number IN (SELECT receiver FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60);
+-- Find the flight id in flights table using the time and origin airport id 
+SELECT id FROM flights WHERE day=29 AND month=7 AND year=2021 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 1;
 
--- Get the list of passengers using the list of passport numbers and the flight id
---SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5);
-SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 1)) AND license_plate IN (SELECT license_plate FROM courthouse_security_logs WHERE day=28 AND month=7 AND year=2020 AND activity="exit");
-SELECT phone_number, passport_number, license_plate FROM people WHERE name="Roger";
-SELECT phone_number, passport_number, license_plate FROM people WHERE name="Madison";
-SELECT phone_number, passport_number, license_plate FROM people WHERE name="Evelyn";
-SELECT phone_number, passport_number, license_plate FROM people WHERE name="Ernest";
-
---SELECT flight_id FROM passengers WHERE passport_number = (SELECT passport_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=28 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5))));
---SELECT passport_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=28 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5)));
---SELECT destination_airport_id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") AND id = (SELECT flight_id FROM passengers WHERE passport_number = (SELECT passport_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5)))));
-
-SELECT city FROM airports WHERE id = (SELECT destination_airport_id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") AND id = (SELECT flight_id FROM passengers WHERE passport_number = (SELECT passport_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5))))));
---SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") AND destination_airport_id = (SELECT destination_airport_id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") AND id = (SELECT flight_id FROM passengers WHERE passport_number = (SELECT passport_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5)))))) ORDER BY hour;
---SELECT passport_number FROM passengers WHERE flight_id = (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") AND destination_airport_id = (SELECT destination_airport_id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id = (SELECT id FROM airports WHERE city="Fiftyville") AND id = (SELECT flight_id FROM passengers WHERE passport_number = (SELECT passport_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5)))))) ORDER BY hour);
-
-SELECT account_number FROM bank_accounts WHERE person_id IN (SELECT id FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 1)) AND license_plate IN (SELECT license_plate FROM courthouse_security_logs WHERE day=28 AND month=7 AND year=2020 AND activity="exit"));
-SELECT account_number FROM atm_transactions WHERE account_number IN (SELECT account_number FROM bank_accounts WHERE person_id IN (SELECT id FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=29 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 1)) AND license_plate IN (SELECT license_plate FROM courthouse_security_logs WHERE day=28 AND month=7 AND year=2020 AND activity="exit")));
-
---SELECT phone_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=28 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5)));
-
---SELECT receiver FROM phone_calls WHERE caller = (SELECT phone_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=28 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5)))) AND day=28 AND month=7 AND year=2020 AND duration < 60;
-
---SELECT name FROM people WHERE phone_number = (SELECT receiver FROM phone_calls WHERE caller = (SELECT phone_number FROM people WHERE name = (SELECT name FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2020 AND duration < 60) AND passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE day=28 AND month=7 AND year=2020 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 5)))) AND day=28 AND month=7 AND year=2020 AND duration < 60);
-
+-- Find passport numbers of the callers in people table using phone_number and license plate 
+/*
+SELECT passport_number 
+FROM people 
+WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2021 AND duration < 60) 
+AND license_plate IN (SELECT license_plate FROM bakery_security_logs WHERE day=28 AND month=7 AND year=2021 AND hour=10 AND 14 < minute < 17 AND activity="exit");
+*/
+-- Find passengers in passengers table using flight id and passport number
+SELECT passport_number 
+FROM passengers 
+WHERE flight_id=(SELECT id FROM flights WHERE day=29 AND month=7 AND year=2021 AND origin_airport_id=(SELECT id FROM airports WHERE city="Fiftyville") ORDER BY hour LIMIT 1)
+AND passport_number IN (SELECT passport_number FROM people WHERE phone_number IN (SELECT caller FROM phone_calls WHERE day=28 AND month=7 AND year=2021 AND duration < 60) AND license_plate IN (SELECT license_plate FROM bakery_security_logs WHERE day=28 AND month=7 AND year=2021 AND hour=10 AND 14 < minute < 17 AND activity="exit"));
