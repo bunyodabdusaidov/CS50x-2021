@@ -21,6 +21,8 @@ WHERE day=28 AND month=7 AND year=2021
 AND transaction_type="withdraw" 
 AND atm_location="Leggett Street";
 
+-- Get the names of the people who took the first flight on the 29th
+
 SELECT name
 FROM people
 JOIN passengers ON people.passport_number=passengers.passport_number
@@ -28,5 +30,7 @@ WHERE flight_id=(
     SELECT id
     FROM flights
     WHERE day=29 AND month=7 AND year=2021
-    ORDER BY 
-)
+    ORDER BY hour, minute
+    LIMIT 1);
+
+-- Get the names of the people who made
