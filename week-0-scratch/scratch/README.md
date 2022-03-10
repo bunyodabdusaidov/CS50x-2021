@@ -1,4 +1,4 @@
-# [**Scratch**](https://cs50.harvard.edu/x/2022/psets/0/scratch/#scratch)
+# **Scratch**
 
 It's time to choose your own adventure! Your assignment, quite simply, is to implement in Scratch, at [scratch.mit.edu](https://scratch.mit.edu/), any project of your choice, be it an interactive story, game, animation, or anything else, subject only to the following requirements:
 
@@ -27,7 +27,7 @@ Alright, off you go. Make us proud!
 
 Once finished with your project, select  **File > Save now**  one last time. Then select  **File > Save to your computer**  and keep that file so that you can submit it. If prompted by your computer to  **Open**  or  **Save**  the file, be sure to  **Save**  it.
 
-[**Hello, World**](https://cs50.harvard.edu/x/2022/psets/0/scratch/#hello-world)
+**Hello, World**
 
 Suffice it to say it&#39;s a bit harder to meet classmates when taking a course online. But, thanks to technology, everyone can at least say hello!
 
@@ -35,15 +35,15 @@ If you have a phone (or digital camera) and would like to say hello to classmate
 
 If you do record a video, upload it to YouTube (unless blocked in your country, in which case you're welcome to upload it elsewhere) so that you can provide us with its URL when you submit!
 
-[**How to Submit**](https://cs50.harvard.edu/x/2022/psets/0/scratch/#how-to-submit)
+**How to Submit**
 
 Be sure to complete  **both**  steps below, in order!
 
-[**Step 1 of 2**](https://cs50.harvard.edu/x/2022/psets/0/scratch/#step-1-of-2)
+**Step 1 of 2**
 
 Submit [this form](https://forms.cs50.io/755f67a3-052d-44af-8d16-b0209fa4dafb).
 
-[**Step 2 of 2**](https://cs50.harvard.edu/x/2022/psets/0/scratch/#step-2-of-2)
+**Step 2 of 2**
 
 This step assumes that you&#39;ve downloaded your Scratch project as a file whose name ends in <mark>.sb3</mark>. And this step also assumes that you&#39;ve signed up for a GitHub account, per the above form.
 
