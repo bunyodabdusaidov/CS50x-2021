@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                let correct_button = document.querySelector("#correct");
+                let incorrect_buttons = document.querySelectorAll(".incorrect");
+                let message = document.querySelector("#message");
+
+                correct_button.addEventListener('click', function(){
+                    correct_button.style.backgroundColor = "green";
+                    message.innerHTML = "Correct";
+                })
+                for (let i = 0; i < incorrect_buttons.length; i++)
+                {
+                    incorrect_buttons[i].addEventListener('click', function(){
+                        incorrect_buttons[i].style.backgroundColor = "red";
+                        message.innerHTML = "Incorrect";
+                    })
+                }
+                
+                document.querySelector("#free-button").addEventListener('click', function(){
+                    let input = document.querySelector('input');
+                    let free_message = document.querySelector("#free-message")
+                    if (input.value == "Switzerland")
+                    {
+                        input.style.backgroundColor = "green";
+                        free_message.innerHTML = "Correct";
+                    }
+                    else
+                    {
+                        input.style.backgroundColor = "red";
+                        free_message.innerHTML = "Incorrect";
+                    }
+                })
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                    <h3>What is the approximate ratio of people to sheep in New Zealand?</h3>
+                    <button class="incorrect">6 people per 1 person</button>
+                    <button class="incorrect">3 people per 1 sheep</button>
+                    <button class="incorrect">1 person per 1 sheep</button>
+                    <button class="incorrect">1 person per 3 sheep</button>
+                    <button id="correct">1 person per 6 sheep</button>
+                    <p id="message"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>In which country is it illegal to own only one guinea pig, as a lone guinea pig might get lonely?</h3>
+                <input type="text">
+                <button id="free-button">Check Answer</button>
+                <p id="free-message"></p>
+            </div>
+        </div>
+    </body>
+</html>
