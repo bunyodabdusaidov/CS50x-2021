@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+{% block main %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Trade</th>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Filled Shares</th>
+                <th>Filled Price</th>
+                <th>Filled Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction["id"] }}</td>
+                    <td>{{ transaction["type"].capitalize() }}</td>
+                    <td>{{ transaction["symbol"] }}</td>
+                    <td>{{ transaction["company"] }}</td>
+                    <td>{{ transaction["shares"] }}</td>
+                    <td>{{ transaction["filled_price"] }}</td>
+                    <td>{{ transaction["filled_time"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

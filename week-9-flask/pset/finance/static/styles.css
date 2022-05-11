@@ -21,3 +21,12 @@ nav .navbar-brand .green
 {
     color: #2e944b;
 }
+
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #D6EEEE;}
+
+
+
